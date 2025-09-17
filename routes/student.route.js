@@ -1,5 +1,5 @@
 import express from "express";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import Student from "../models/student.model.js";
 import College from "../models/college.model.js";
 
