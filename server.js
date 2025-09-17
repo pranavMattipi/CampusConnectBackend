@@ -34,7 +34,7 @@ app.use("/api/search", searchRoutes);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve frontend in production
+// Serve frontend in production (for Vercel)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
@@ -49,9 +49,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Start server
-const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
+// ❌ REMOVE app.listen()
+// ✅ Export app for Vercel
+export default app;
+
 //STUDENT FORMAT
 //POST http://localhost:8000/api/students/add
 // {
