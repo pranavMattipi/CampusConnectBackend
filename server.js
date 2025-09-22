@@ -33,13 +33,8 @@ app.get("/", (req, res) => {
   res.send("✅ College Events & Student API is running...");
 });
 
-// --- Important for Vercel ---
-// Export the app (Vercel will handle the server)
-export default app;
-
-// --- Local development mode ---
-// Only run app.listen if not in Vercel environment
-if (process.env.NODE_ENV !== "production") {
-  const PORT = process.env.PORT || 8000;
-  app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
-}
+// --- Render & Local deployment ---
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
