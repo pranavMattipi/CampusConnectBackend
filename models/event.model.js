@@ -13,13 +13,16 @@ const eventSchema = new mongoose.Schema(
     date: { type: String, required: true },
     time: { type: String, required: true },
     location: { type: String, required: true },
-    city: { type: String, required: true },     // ✅ Added city
-    college: { type: String, required: true },  // ✅ Added college
+    city: { type: String, required: true },     // ✅ City
+    college: { type: String, required: true },  // ✅ College
     highlights: [{ type: String, required: true }],
     organizerName: { type: String, required: true },
     organizerLogo: { type: String, required: true },
     price: { type: Number, required: true },
     castMembers: [castMemberSchema],
+
+    // ✅ New field for UPI / payment QR image
+    qrImage: { type: String, required: true },
   },
   { timestamps: true }
 );
