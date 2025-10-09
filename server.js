@@ -17,18 +17,19 @@ connectDB();
 
 const app = express();
 
-// ✅ CORS configuration — add this BEFORE your routes
-app.use(
-  cors({
-    origin: [
-      "https://campus-connect-frontend.vercel.app", // your deployed frontend
-      "http://localhost:5173", // optional: for local testing
-    ],
-    credentials: true,
-  })
-);
+
+
+
+
+
+
+
+
+
+
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 // API Routes
