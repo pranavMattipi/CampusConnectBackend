@@ -5,7 +5,7 @@ import Student from "../models/student.model.js";
 
 const router = express.Router();
 
-// 🔎 Global Search API
+// 🔍 Global Search API
 router.get("/", async (req, res) => {
   try {
     const { q } = req.query;

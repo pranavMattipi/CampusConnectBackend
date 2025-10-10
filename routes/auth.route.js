@@ -41,7 +41,7 @@ router.post("/login", async (req, res) => {
     // ✅ Respond with token + student info
     res.json({
       token,
-      studentId: student._id,
+      studentId: student.studentId, // Use the custom studentId field, not MongoDB _id
       name: student.name,
       college: {
         id: student.college._id,
