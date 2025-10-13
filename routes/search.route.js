@@ -1,5 +1,5 @@
 import express from "express";
-import { event } from "../models/event.model.js";
+import Event from "../models/event.model.js";
 import College from "../models/college.model.js";
 import Student from "../models/student.model.js";
 
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 
     const regex = new RegExp(q, "i"); // case-insensitive match
 
-    const events = await event.find({ title: regex }).limit(5);
+    const events = await Event.find({ title: regex }).limit(5);
     const colleges = await College.find({ name: regex }).limit(5);
     const students = await Student.find({ name: regex }).limit(5);
 

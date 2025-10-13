@@ -36,6 +36,15 @@ app.get("/", (req, res) => {
   res.send("✅ College Events & Student API is running...");
 });
 
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.json({ 
+    status: "OK", 
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development"
+  });
+});
+
 // --- Vercel (serverless) export and local development server ---
 // On Vercel, the framework runtime will import this file and use the exported app.
 // We only call listen() when running locally (e.g., Node/Render/Dev).
