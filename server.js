@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import cors from "cors";
+import path from "path";
 
 // Routes
 import searchRoutes from "./routes/search.route.js";
@@ -9,6 +10,7 @@ import eventRoutes from "./routes/event.route.js";
 import authRoutes from "./routes/auth.route.js";
 import studentRoutes from "./routes/student.route.js";
 import collegeRoutes from "./routes/college.route.js";
+import uploadRoute from "./routes/upload.route.js"; // ✅ ADD THIS LINE
 
 dotenv.config();
 
@@ -18,11 +20,14 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://campus-connect-frontend-seven.vercel.app'],
-  credentials: true
-}));
+app.use(cors());
 app.use(express.json());
+
+// ✅ Upload route
+app.use("/api/upload", uploadRoute);
+
+// ✅ Serve uploaded files publicly
+app.use("/uploads", express.static(path.join(process.cwd(), "/uploads")));
 
 // API Routes
 app.use("/api/events", eventRoutes);
@@ -36,24 +41,8 @@ app.get("/", (req, res) => {
   res.send("✅ College Events & Student API is running...");
 });
 
-// Health check endpoint
-app.get("/health", (req, res) => {
-  res.json({ 
-    status: "OK", 
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV || "development"
-  });
-});
-
-// --- Vercel (serverless) export and local development server ---
-// On Vercel, the framework runtime will import this file and use the exported app.
-// We only call listen() when running locally (e.g., Node/Render/Dev).
+// --- Render & Local deployment ---
 const PORT = process.env.PORT || 8000;
-
-if (process.env.NODE_ENV !== "production") {
-  app.listen(PORT, () => {
-    console.log(`✅ Server running on port ${PORT}`);
-  });
-}
-
-export default app;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
